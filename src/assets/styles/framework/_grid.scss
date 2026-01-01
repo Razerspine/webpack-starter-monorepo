@@ -19,7 +19,7 @@
   grid-template-columns: repeat(#{$columns}, 1fr);
   gap: $gutter;
   width: 100%;
-  align-items: start;
+  align-items: stretch;
 }
 
 /* column spans */

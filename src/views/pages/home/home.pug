@@ -1,7 +1,8 @@
 extends @views/layout/index.pug
 
 block variables
-  - title = 'Home'
+  - title = 'Webpack Starter Kit'
+  - const gitHubLink = 'https://github.com/Razerspine/webpack-starter-kit'
 
 append style
   link(rel='stylesheet' href='./style.scss')
@@ -11,4 +12,51 @@ append script
 
 block content
   section.section
-    h1 Home page
+    .row
+      .col-12
+        h1.title-h1.m-b-3 🚀 #{title}
+        p.title-h5.text-muted.m-b-2
+          | A lightweight, powerful, and production-ready boilerplate for building modern static websites.
+          | Powered by Pug, SCSS, and ES6+.
+
+        .d-flex.w-100.m-b-4
+          a.btn.btn--primary.btn--medium.m-r-1(href=gitHubLink target="_blank") View on GitHub
+          a.btn.btn--outline.btn--medium(href="/themes.html") View Theme
+
+  section.section
+    .row
+      .col-12.col-sm-6.col-md-4
+        .card.h-100
+          h3.title-h5.m-b-1 🛠️ Webpack 5
+          p.text-body
+            | Fully configured Webpack build system with Hot Module Replacement (HMR) for a fast development experience.
+
+      .col-12.col-sm-6.col-md-4
+        .card.h-100
+          h3.title-h5.m-b-1 🐶 Pug Templating
+          p.text-body
+            | Write cleaner HTML using Pug (formerly Jade). Includes layout inheritance, mixins, and variable support.
+
+      .col-12.col-sm-6.col-md-4
+        .card.h-100
+          h3.title-h5.m-b-1 🎨 SCSS & Theming
+          p.text-body
+            | Built-in support for SASS/SCSS. Features a custom flexible grid system and CSS Variables for easy Dark/Light mode switching.
+
+      .col-12.col-sm-6.col-md-4
+        .card.h-100
+          h3.title-h5.m-b-1 ⚡ JavaScript ES6+
+          p.text-body
+            | Modern JavaScript support via Babel. Write modular code using ES6 imports/exports comfortably.
+
+      .col-12.col-sm-6.col-md-4
+        .card.h-100
+          h3.title-h5.m-b-1 🖼️ Asset Management
+          p.text-body
+            | Automatic handling of images, fonts, and static assets. Optimized for production builds.
+
+      .col-12.col-sm-6.col-md-4
+        .card.h-100
+          h3.title-h5.m-b-1 📐 Clean Architecture
+          p.text-body
+            | Organized folder structure separating logic, styles, and views. scalable for small to medium projects.
