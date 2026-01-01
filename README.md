@@ -32,9 +32,9 @@ src/
 │       ├── framework/  # Core logic (grid, theme variables)
 │       └── ...
 ├── views/
-│   ├── layouts/        # Main layout templates (header / footer)
+│   ├── layout/         # Main layout templates (header / aside / main / footer)
 │   ├── pages/          # Individual pages (home, themes, etc.)
-│   └── utils/          # Pug mixins and variables
+│   └── mixins/         # Pug mixins and variables
 ```
 
 ---
