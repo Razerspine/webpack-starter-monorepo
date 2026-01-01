@@ -1,0 +1,37 @@
+@use 'variables' as *;
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $font-family;
+  font-size: .95rem;
+  color: $color-dark;
+  background: $white;
+
+  th, td {
+    padding: .75rem;
+    border: 1px solid #e9ecef;
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  thead {
+    background: $color-light;
+
+    th {
+      font-weight: 700;
+    }
+  }
+
+  tbody tr:hover {
+    background: lighten($color-light, 2%);
+  }
+
+  .table-sm th, .table-sm td {
+    padding: .4rem .6rem;
+  }
+
+  .table-striped tbody tr:nth-child(odd) {
+    background: rgba(0, 0, 0, .02);
+  }
+}

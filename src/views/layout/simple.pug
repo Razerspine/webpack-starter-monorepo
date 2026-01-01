@@ -1,0 +1,15 @@
+extends _simple
+
+append head
+  link(rel='stylesheet' href='@styles/main.scss')
+
+append head
+  script(defer src='@scripts/common.js')
+
+block body
+  include _header
+
+  main.main-simple
+    block content
+
+  include _footer

@@ -1,0 +1,12 @@
+- const navList = [
+-   {name: 'Home', url: '/index.html' },
+-   {name: 'Themes', url: '/themes.html'},
+-   {name: 'Buttons', url: '/buttons.html'},
+- ];
+
+aside.aside
+  nav(aria-label='navigation').navigation
+    ul.list
+      each item in navList
+        li.list__item
+          a(href=item.url).list__link=item.name

@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+.main {
+  grid-area: main;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 $gutter;
+  @media screen and (min-width: map-get($breakpoints, md)) {
+    padding: 0;
+  }
+
+  &__container {
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-outline);
+    border-radius: $border-radius;
+    width: 100%;
+    min-height: 100%;
+    padding: $gutter;
+    @media screen and (min-width: map-get($breakpoints, md)) {
+      padding: calc($gutter * 2);
+    }
+  }
+}

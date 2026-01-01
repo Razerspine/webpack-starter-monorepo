@@ -1,0 +1,48 @@
+extends @views/layout/index.pug
+
+block variables
+  - title = 'Buttons'
+
+append style
+  link(rel='stylesheet' href='./style.scss')
+
+block content
+  section.section
+    h1.title-h1.m-b-4 Buttons
+    .buttons-row
+
+      h5.title-h4 Primary
+      .buttons-row__section
+        +btn('small', 'primary', 'small', {type: 'button'})
+        +btn('medium', 'primary', 'medium', {type: 'button'})
+        +btn('large', 'primary', 'large', {type: 'button'})
+
+      h5.title-h4 Secondary
+      .buttons-row__section
+        +btn('small', 'secondary', 'small', {type: 'button'})
+        +btn('medium', 'secondary', 'medium', {type: 'button'})
+        +btn('large', 'secondary', 'large', {type: 'button'})
+
+      h5.title-h4 Outline
+      .buttons-row__section
+        +btn('small', 'outline', 'small', {type: 'button'})
+        +btn('medium', 'outline', 'medium', {type: 'button'})
+        +btn('large', 'outline', 'large', {type: 'button'})
+
+      h5.title-h4 Button with icon
+      .buttons-row__section
+        +btn('small', 'primary', 'small', {type: 'button'}, 'settings')
+        +btn('medium', 'secondary', 'medium', {type: 'button'}, 'settings')
+        +btn('large', 'outline', 'large', {type: 'button'}, 'settings')
+
+      h5.title-h4 Text only
+      .buttons-row__section
+        +btn('small primary', 'text-primary', 'small', {type: 'button'})
+        +btn('medium secondary', 'text-secondary', 'medium', {type: 'button'})
+
+      h5.title-h4 Icon only
+      .buttons-row__section
+        +btn(null, 'icon-primary', 'icon-small', {type: 'button'}, 'settings')
+        +btn(null, 'icon-secondary', 'icon-medium', {type: 'button'}, 'settings')
+        +btn(null, 'icon-outline', 'icon-large', {type: 'button'}, 'settings')
+        +btn(null, 'icon', 'icon-medium', {type: 'button'}, 'settings')

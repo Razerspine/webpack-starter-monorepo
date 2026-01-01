@@ -1,0 +1,103 @@
+//- Button mixin
+//- Renders a configurable button with optional icon and text. Visual appearance
+//- is primarily controlled by the `variant` and `size` parameters and by CSS
+//- classes applied via `attrs` or global styles.
+//-
+//- Parameters:
+//-   text        - **String | null** — Visible button text. If `null` or an empty
+//-                 string, the text node is omitted (icon-only button).
+//-                 Example: 'Save', 'small primary'.
+//-                 Default: null
+//-   variant     - **String** — Visual variant modifier appended to `.btn--{variant}`.
+//-                 Common values used in the project:
+//-                   - 'primary'      (filled primary color)
+//-                   - 'secondary'    (filled secondary color)
+//-                   - 'outline'      (outlined style)
+//-                   - 'text-primary' (text-only primary color)
+//-                   - 'text-secondary' (text-only secondary color)
+//-                   - 'icon-primary' (icon-only primary background)
+//-                   - 'icon-secondary'
+//-                   - 'icon-outline'
+//-                   - 'icon'         (generic icon style)
+//-                 These variants are implemented in CSS; change or extend them
+//-                 in your stylesheet to add new visual styles.
+//-                 Default: 'primary'
+//-   size        - **String** — Size modifier appended to `.btn--{size}` and used
+//-                 for icon sizing `.icon--{size}`. Common values:
+//-                   - 'small'
+//-                   - 'medium'
+//-                   - 'large'
+//-                 Default: 'medium'
+//-   attrs       - **Object | null** — Attributes to spread onto the `<button>`
+//-                 element via `&attributes(attrs)`. Use this to pass `type`,
+//-                 `id`, `aria-*`, `class`, `data-*`, etc. If `null`, no
+//-                 attributes are spread.
+//-                 Example: `{ type: 'button', id: 'saveBtn', ariaLabel: 'Save' }`.
+//-                 Default: { type: 'button' }
+//-   iconName    - **String | null** — Optional icon name to render inside a
+//-                 `<span>` with classes `.button-icon.material-symbols-outlined`.
+//-                 If `null`, no icon is rendered.
+//-                 Default: null
+//-
+//- Behavior:
+//-   - `hasText` is computed to decide whether to render the text node.
+//-   - `btnClass` is built as 'btn btn--' + variant and `btnSize` as 'btn--' + size.
+//-   - The `<button>` receives combined classes and attributes from `attrs`.
+//-   - If `iconName` is provided, a `<span>` with the icon is rendered before text.
+//-   - If `text` is a non-empty string, the text content is rendered after the icon.
+//-
+//- Notes about styling and classes:
+//-   - Many visual states are controlled purely by CSS classes (variant and size).
+//-   - To add custom classes, include `class` inside `attrs`, e.g.
+//-     `{ class: 'my-custom-class', id: 'btn1' }`.
+//-   - To create icon-only buttons, pass `text = null` and use an `icon-*` variant.
+//-   - For icon-only buttons you can also apply explicit icon size helper classes
+//-     such as `icon-small`, `icon-medium`, `icon-large` (these control icon
+//-     appearance independent of the `size` parameter). The mixin also applies
+//-     `.icon--{size}` to the icon span when `size` is provided, so you can use
+//-     either approach or combine them as needed.
+//-   - If you need RTL-aware spacing or different icon placement, update CSS rules.
+//-
+//- Examples (matching the sections in the Buttons page):
+//-   // Primary sizes
+//-   +btn('small', 'primary', 'small', {type: 'button'})
+//-   +btn('medium', 'primary', 'medium', {type: 'button'})
+//-   +btn('large', 'primary', 'large', {type: 'button'})
+//-
+//-   // Secondary sizes
+//-   +btn('small', 'secondary', 'small', {type: 'button'})
+//-   +btn('medium', 'secondary', 'medium', {type: 'button'})
+//-   +btn('large', 'secondary', 'large', {type: 'button'})
+//-
+//-   // Outline
+//-   +btn('small', 'outline', 'small', {type: 'button'})
+//-   +btn('medium', 'outline', 'medium', {type: 'button'})
+//-   +btn('large', 'outline', 'large', {type: 'button'})
+//-
+//-   // Button with icon
+//-   +btn('small', 'primary', 'small', {type: 'button'}, 'settings')
+//-   +btn('medium', 'secondary', 'medium', {type: 'button'}, 'settings')
+//-   +btn('large', 'outline', 'large', {type: 'button'}, 'settings')
+//-
+//-   // Text only (text-style variants)
+//-   +btn('small primary', 'text-primary', 'small', {type: 'button'})
+//-   +btn('medium secondary', 'text-secondary', 'medium', {type: 'button'})
+//-
+//-   // Icon only (pass null for text and use icon-* variants)
+//--  // You can also add explicit icon size helper classes: icon-small, icon-medium, icon-large
+//-   +btn(null, 'icon-primary', 'icon-medium', {type: 'button'}, 'settings')
+//-   +btn(null, 'icon-secondary', 'icon-medium', {type: 'button'}, 'settings')
+//-   +btn(null, 'icon-outline', 'icon-medium', {type: 'button'}, 'settings')
+//-   +btn(null, 'icon', 'icon-medium', {type: 'button'}, 'settings')
+//-
+//- Keep this docblock updated when you change parameter names, defaults, or
+//- the CSS variants so editor hover comments remain accurate.
+mixin btn(text, variant='primary', size='medium', attrs={'type':'button'}, iconName=null)
+  - const hasText = typeof text === 'string' && text.trim().length > 0;
+  - const btnClass = 'btn btn--' + variant;
+  - const btnSize = 'btn--' + size;
+  button(class=btnClass + ' ' + btnSize)&attributes(attrs)
+    if iconName
+      span.button-icon.material-symbols-outlined(class='icon--' + size) #{iconName}
+    if hasText
+      | #{text}

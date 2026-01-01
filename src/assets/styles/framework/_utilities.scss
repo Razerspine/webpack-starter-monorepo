@@ -1,0 +1,175 @@
+@use 'sass:math';
+@use 'helpers';
+
+// SPACING utilities: m- p- (margin/padding) with directions
+$space-map: (0: 0rem, 1: 0.5rem, 2: 1rem, 3: 1.5rem, 4: 2rem);
+$directions: ("" : "", t: "-top", r: "-right", b: "-bottom", l: "-left", x: ("-left", "-right"), y: ("-top", "-bottom"));
+$scales: 0 1 2 3 4;
+
+@function helpers-space($key) {
+  @if map-has-key($space-map, $key) {
+    @return map-get($space-map, $key);
+  } @else {
+    @warn "Unknown spacing key `#{$key}`. Returning 0rem.";
+    @return 0rem;
+  }
+}
+
+@each $d, $prop in $directions {
+  @each $s in $scales {
+    // Margin class
+    $m-class: if($d == "", ".m-#{$s}", ".m-#{$d}-#{$s}");
+    #{$m-class} {
+      @if $d == "" {
+        margin: helpers-space($s);
+      } @else if type-of($prop) == 'list' {
+        @each $p in $prop {
+          margin#{$p}: helpers-space($s);
+        }
+      } @else {
+        margin#{$prop}: helpers-space($s);
+      }
+    }
+
+    // Padding class
+    $p-class: if($d == "", ".p-#{$s}", ".p-#{$d}-#{$s}");
+    #{$p-class} {
+      @if $d == "" {
+        padding: helpers-space($s);
+      } @else if type-of($prop) == 'list' {
+        @each $p in $prop {
+          padding#{$p}: helpers-space($s);
+        }
+      } @else {
+        padding#{$prop}: helpers-space($s);
+      }
+    }
+  }
+}
+
+/* DISPLAY utilities */
+$display-map: (d-none: none, d-block: block, d-inline: inline, d-inline-block: inline-block, d-flex: flex, d-inline-flex: inline-flex, d-grid: grid);
+@each $class, $val in $display-map {
+  .#{$class} {
+    display: $val;
+  }
+}
+
+/* TEXT ALIGN */
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+/* VISIBILITY */
+.visible {
+  visibility: visible;
+  opacity: 1;
+}
+
+.invisible {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* FLEX helpers */
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* GRID helpers */
+.grid {
+  display: grid;
+}
+
+.grid-center {
+  display: grid;
+  place-items: center;
+}
+
+/* WIDTH / HEIGHT utilities (percent / auto) */
+.w-100 {
+  width: 100%;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.h-auto {
+  height: auto;
+}
+
+/* TEXT TRUNCATE */
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* TITLES */
+.title-h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.title-h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.title-h3 {
+  font-size: 1.375rem;
+  font-weight: 700;
+}
+
+.title-h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.title-h5 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.title-h6 {
+  font-size: .875rem;
+  font-weight: 700;
+}

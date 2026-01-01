@@ -1,0 +1,22 @@
+extends _base
+
+append variables
+
+append head
+
+append style
+  link(rel='stylesheet' href='@styles/main.scss')
+
+append head
+  script(src='@scripts/common.js')
+
+block body
+  include _header
+
+  include _aside
+
+  main.main
+    .main__container
+      block content
+
+  include _footer

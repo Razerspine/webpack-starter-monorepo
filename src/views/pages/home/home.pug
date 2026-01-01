@@ -1,0 +1,14 @@
+extends @views/layout/index.pug
+
+block variables
+  - title = 'Home'
+
+append style
+  link(rel='stylesheet' href='./style.scss')
+
+append script
+  script(src='./home.js')
+
+block content
+  section.section
+    h1 Home page

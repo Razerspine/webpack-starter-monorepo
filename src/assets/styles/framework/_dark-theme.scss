@@ -1,0 +1,21 @@
+html[data-theme="dark"] {
+  --bg-color: #020617;
+  --bg-surface: #0f172a;
+  --bg-subtle: #1e293b;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-disabled: #475569;
+  --text-on-brand: #ffffff;
+
+  --border-subtle: #1e293b;
+  --border-strong: #334155;
+  --border-interactive: var(--brand-500);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-outline: 0 0 12px rgba(0, 0, 0, 0.5);
+
+  --success: #34d399;
+  --error: #f87171;
+}
