@@ -5,7 +5,7 @@
   display: flex;
   justify-content: flex-start;
   padding: 0 $gutter;
-  @media screen and (min-width: map-get($breakpoints, md)) {
+  @media screen and (min-width: map-get($breakpoints, lg)) {
     padding: 0;
   }
 
@@ -16,7 +16,7 @@
     width: 100%;
     min-height: 100%;
     padding: $gutter;
-    @media screen and (min-width: map-get($breakpoints, md)) {
+    @media screen and (min-width: map-get($breakpoints, lg)) {
       padding: calc($gutter * 2);
     }
   }

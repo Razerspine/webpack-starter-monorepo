@@ -14,7 +14,7 @@
   font-size: $base-font-size;
   font-weight: 400;
   line-height: 1.5;
-  @media screen and (min-width: map-get($breakpoints, md)) {
+  @media screen and (min-width: map-get($breakpoints, lg)) {
     grid-template-areas:
       'header header header header'
       'gutter-left aside main gutter-right'
