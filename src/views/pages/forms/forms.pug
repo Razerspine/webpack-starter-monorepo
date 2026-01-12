@@ -1,6 +1,6 @@
 extends @views/layout/index.pug
 include @views/mixins/form-input.pug
-include @views/mixins/form-select.pug
+include @views/mixins/single-select.pug
 include @views/mixins/form-checkbox.pug
 include @views/mixins/form-radio.pug
 include @views/mixins/form-textarea.pug
@@ -21,11 +21,12 @@ block content
 
       +formTextarea('message', 'Message', 'Type your message...', 'message')
 
-      +formSelect('topic', null, [
-        {value: 'support', text: 'Support'},
-        {value: 'feedback', text: 'Feedback'},
-        {value: 'other', text: 'Other'}
-      ])
+      .form-group
+        +singleSelect('topic', null, [
+          {value: 'support', text: 'Support'},
+          {value: 'feedback', text: 'Feedback'},
+          {value: 'other', text: 'Other'}
+        ])
 
       +formCheckbox('subscribe', 'Subscribe to newsletter', 'newsletter', 'yes')
 

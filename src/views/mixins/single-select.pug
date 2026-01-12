@@ -1,4 +1,4 @@
-//- Form select mixin
+//- Single select mixin
 //- Renders a configurable <select> element with label, options, and optional placeholder.
 //- Supports both arrays of strings and arrays of objects with configurable
 //- keys for label and value. Provides ability to set a default selected option.
@@ -80,8 +80,7 @@
 //-     {value:'feedback', text:'Feedback'},
 //-     {value:'other', text:'Other'}
 //-   ], 'text', 'value', '', 'Please select a topic')
-mixin formSelect(id, label, options, labelKey='text', valueKey='value', selectedValue='', placeholder='Choose an option')
-  .form-group
+mixin singleSelect(id, label, options, labelKey='text', valueKey='value', selectedValue='', placeholder='Choose an option')
     if label
       label.form-label(for=id)= label
     select.form-select(id=id, name=id)
@@ -89,6 +88,6 @@ mixin formSelect(id, label, options, labelKey='text', valueKey='value', selected
         option(value='', disabled, selected, hidden)= placeholder
       each opt in options
         if typeof opt === 'string'
-          option(value=opt, selected=(opt === selectedValue))= opt
+          option(value=opt, data-value=opt selected=(opt === selectedValue))= opt
         else
-          option(value=opt[valueKey], selected=(opt[valueKey] === selectedValue))= opt[labelKey]
+          option(value=opt[valueKey], data-value=opt[valueKey] selected=(opt[valueKey] === selectedValue))= opt[labelKey]
