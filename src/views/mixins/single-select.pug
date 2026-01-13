@@ -1,4 +1,4 @@
-//- Single select mixin
+//- singleSelect mixin
 //- Renders a configurable <select> element with label, options, and optional placeholder.
 //- Supports both arrays of strings and arrays of objects with configurable
 //- keys for label and value. Provides ability to set a default selected option.
@@ -41,41 +41,41 @@
 //-     the `selected` attribute.
 //-   - If no label is provided and no selectedValue is set, a placeholder
 //-     option is rendered at the top (`disabled selected hidden`).
-//-   - The <select> element always has `.form-select` class for styling.
+//-   - The <select> element always has `.single-select` class for styling.
 //-   - The label, if provided, uses `.form-label` class.
 //-
 //- Notes about styling and classes:
-//-   - Visual appearance is controlled by `.form-select` and `.form-label`
+//-   - Visual appearance is controlled by `.single-select` and `.form-label`
 //-     styles in your SCSS.
 //-   - To add custom classes or attributes, extend the mixin or wrap it.
 //-   - Ensure `id` is unique to avoid duplicate `for`/`id` collisions.
 //-
 //- Examples:
 //-   // Simple array of strings
-//-   +formSelect('topic1', 'Topic', ['Support', 'Feedback', 'Other'])
+//-   +singleSelect('topic1', 'Topic', ['Support', 'Feedback', 'Other'])
 //-
 //-   // Array of objects with value/text
-//-   +formSelect('topic2', 'Topic', [
+//-   +singleSelect('topic2', 'Topic', [
 //-     {value:'support', text:'Support'},
 //-     {value:'feedback', text:'Feedback'},
 //-     {value:'other', text:'Other'}
 //-   ])
 //-
 //-   // Array of objects with id/label, custom keys
-//-   +formSelect('topic3', 'Topic', [
+//-   +singleSelect('topic3', 'Topic', [
 //-     {id:'1', label:'Support'},
 //-     {id:'2', label:'Feedback'}
 //-   ], 'label', 'id')
 //-
 //-   // With default selected value
-//-   +formSelect('topic4', 'Topic', [
+//-   +singleSelect('topic4', 'Topic', [
 //-     {value:'support', text:'Support'},
 //-     {value:'feedback', text:'Feedback'},
 //-     {value:'other', text:'Other'}
 //-   ], 'text', 'value', 'feedback')
 //-
 //-   // Without label, with placeholder
-//-   +formSelect('topic5', null, [
+//-   +singleSelect('topic5', null, [
 //-     {value:'support', text:'Support'},
 //-     {value:'feedback', text:'Feedback'},
 //-     {value:'other', text:'Other'}
@@ -83,7 +83,7 @@
 mixin singleSelect(id, label, options, labelKey='text', valueKey='value', selectedValue='', placeholder='Choose an option')
   if label
     label.form-label(for=id)= label
-  select.single-select(id=id, name=id)
+  select.single-select(id=id, name=id required)
     if !label && !selectedValue
       option(value='', disabled, selected, hidden)= placeholder
     each opt in options
