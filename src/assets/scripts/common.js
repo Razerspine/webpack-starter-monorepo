@@ -7,16 +7,15 @@ import uk from '../i18n/uk.json';
 
 (function () {
   const logger = new ConsoleLogger();
-  logger.success('common.js successfully initialized and is now active!');
-
   const locales = {en, uk};
   const translationService = new TranslationService(locales, 'en');
-  translationService.init();
-
   const languageSwitcher = new LanguageSwitcher(translationService, 'languageSwitcher');
+
+  logger.success('common.js successfully initialized and is now active!');
 
   document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = new ThemeToggle();
+    translationService.init();
     languageSwitcher.init();
   });
 })();
