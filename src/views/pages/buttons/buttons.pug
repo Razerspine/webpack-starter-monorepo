@@ -8,8 +8,8 @@ block variables
   -   { parameter: 'text', type: 'String | null', default: 'null', description: 'Visible button text; pass null for icon-only buttons' },
   -   { parameter: 'variant', type: 'String', default: 'primary', description: 'Visual variant; added as class btn--{variant}' },
   -   { parameter: 'size', type: 'String', default: 'medium', description: 'Size modifier; added as class btn--{size} and icon--{size}' },
-  -   { parameter: 'attrs', type: 'Object | null', default: { type: 'button' }, description: 'Attributes spread to the <button> via &attributes(attrs) (type, id, aria-*, class, data-*)' },
-  -   { parameter: 'iconName', type: 'String | null', default: 'null', description: 'Icon name rendered inside <span class="button-icon material-symbols-outlined">' }
+  -   { parameter: 'attrs', type: 'Object | null', default: { type: 'button' }, description: 'Attributes spread to the &lt;button&gt; via &amp;attributes(attrs) (type, id, aria-*, class, data-*)' },
+  -   { parameter: 'iconName', type: 'String | null', default: 'null', description: 'Icon name rendered inside &lt;span&gt with class="button-icon material-symbols-outline"' }
   -]
 
 append style
@@ -20,16 +20,17 @@ block content
     h1.title-h1.m-b-4 Buttons
     .content-block.m-b-4
       h3.title-h3.m-b-2 Button mixin parameters
-      +dataTable(data, ['parameter', 'type', 'default', 'description'], {
-        showIndex: false,
-        showActions: false,
-        labels: {
-          parameter: 'Parameter',
-          type: 'Type',
-          default: 'Default',
-          description: 'Description'
-        }
-      })
+      .table-wrapper
+        +dataTable(data, ['parameter', 'type', 'default', 'description'], {
+          showIndex: false,
+          showActions: false,
+          labels: {
+            parameter: 'Parameter',
+            type: 'Type',
+            default: 'Default',
+            description: 'Description'
+          }
+        })
 
     .content-block.m-b-4
       h3.title-h3.m-b-2 Accessibility notes
