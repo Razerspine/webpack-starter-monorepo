@@ -3,103 +3,101 @@
 //- is primarily controlled by the `variant` and `size` parameters and by CSS
 //- classes applied via `attrs` or global styles.
 //-
+//- NOTE: project migrated to an SVG sprite. The mixin references symbols by id
+//- using <use href="#icon-{iconName}"> (xlink:href kept for legacy browsers).
+//- Ensure your sprite contains <symbol id="icon-{name}"> entries.
+//-
 //- Parameters:
 //-   text        - **String | null** — Visible button text. If `null` or an empty
 //-                 string, the text node is omitted (icon-only button).
-//-                 Example: 'Save', 'small primary'.
 //-                 Default: null
 //-   variant     - **String** — Visual variant modifier appended to `.btn--{variant}`.
-//-                 Common values used in the project:
-//-                   - 'primary'      (filled primary color)
-//-                   - 'secondary'    (filled secondary color)
-//-                   - 'outline'      (outlined style)
-//-                   - 'text-primary' (text-only primary color)
-//-                   - 'text-secondary' (text-only secondary color)
-//-                   - 'icon-primary' (icon-only primary background)
-//-                   - 'icon-secondary'
-//-                   - 'icon-outline'
-//-                   - 'icon'         (generic icon style)
-//-                 These variants are implemented in CSS; change or extend them
-//-                 in your stylesheet to add new visual styles.
+//-                 Common values: 'primary', 'secondary', 'outline', 'text-primary',
+//-                 'text-secondary', 'icon-primary', 'icon-secondary', 'icon-outline', 'icon'.
 //-                 Default: 'primary'
 //-   size        - **String** — Size modifier appended to `.btn--{size}` and used
-//-                 for icon sizing `.icon--{size}`. Common values:
-//-                   - 'small'
-//-                   - 'medium'
-//-                   - 'large'
+//-                 for icon sizing `.icon--{size}`. Common values: 'small', 'medium', 'large'.
 //-                 Default: 'medium'
 //-   attrs       - **Object | null** — Attributes to spread onto the `<button>`
 //-                 element via `&attributes(attrs)`. Use this to pass `type`,
-//-                 `id`, `aria-*`, `class`, `data-*`, etc. If `null`, no
-//-                 attributes are spread.
-//-                 Example: `{ type: 'button', id: 'saveBtn', ariaLabel: 'Save' }`.
+//-                 `id`, `aria-*`, `data-*`, etc. If `null`, no attributes are spread.
+//-                 If `attrs.class` is present it will be merged with the base classes.
 //-                 Default: { type: 'button' }
-//-   iconName    - **String | null** — Icon name (without prefix). The mixin uses `#icon-{iconName}`
-//-                 in <use> to reference the SVG sprite symbol. If `null`, no icon is rendered.
-//-                 Example: 'settings' -> references <symbol id="icon-settings">.
+//-   iconName    - **String | null** — Icon name (without prefix). The mixin uses
+//-                 `#icon-{iconName}` in <use> to reference the SVG sprite symbol.
+//-                 If `null`, no icon is rendered.
 //-                 Default: null
 //-
-//- Behavior:
-//-   - `hasText` is computed to decide whether to render the text node.
-//-   - `btnClass` is built as 'btn btn--' + variant and `btnSize` as 'btn--' + size.
-//-   - The `<button>` receives combined classes and attributes from `attrs`.
-//-   - If `iconName` is provided, the mixin renders <svg><use href="#icon-{iconName}"></use></svg>.
-//-   - Both `href` and `xlink:href` are included for broader browser compatibility.
-//-   - If `text` is a non-empty string, the text content is rendered after the icon.
+//- Accessibility notes:
+//-   - If the button has visible text, the SVG is treated as decorative and gets
+//-     `aria-hidden="true"` so screen readers ignore it.
+//-   - If the button is icon-only (text === null or empty), the mixin will set
+//-     `aria-label` on the button if `attrs` does not already provide one. Provide
+//-     a meaningful `aria-label` in `attrs` for icon-only buttons.
 //-
-//- Notes about styling and classes:
-//-   - Many visual states are controlled purely by CSS classes (variant and size).
-//-   - To add custom classes, include `class` inside `attrs`, e.g.
-//-     `{ class: 'my-custom-class', id: 'btn1' }`.
-//-   - To create icon-only buttons, pass `text = null` and use an `icon-*` variant.
-//-   - For icon-only buttons you can also apply explicit icon size helper classes
-//-     such as `icon-small`, `icon-medium`, `icon-large` (these control icon
-//-     appearance independent of the `size` parameter). The mixin also applies
-//-     `.icon--{size}` to the icon span when `size` is provided, so you can use
-//-     either approach or combine them as needed.
-//-   - If you need RTL-aware spacing or different icon placement, update CSS rules.
+//- Behavior summary:
+//-   - Computes `hasText` to decide whether to render the text node.
+//-   - Builds base classes and safely merges any `attrs.class` with them.
+//-   - Renders <svg><use href="#icon-{iconName}" xlink:href="#icon-{iconName}"></use></svg>
+//-     when `iconName` is provided.
+//-   - Sets `aria-hidden` on the SVG when text is present; ensures icon-only buttons
+//-     have an accessible label.
 //-
-//- Examples (matching the sections in the Buttons page):
-//-   // Primary sizes
-//-   +btn('small', 'primary', 'small', {type: 'button'})
-//-   +btn('medium', 'primary', 'medium', {type: 'button'})
-//-   +btn('large', 'primary', 'large', {type: 'button'})
+//- Examples (corrected to match mixin signature):
+//-   // Primary sizes (text only)
+//-   +btn('Save', 'primary', 'small', {type: 'button'})
+//-   +btn('Save', 'primary', 'medium', {type: 'button'})
+//-   +btn('Save', 'primary', 'large', {type: 'button'})
 //-
-//-   // Secondary sizes
-//-   +btn('small', 'secondary', 'small', {type: 'button'})
-//-   +btn('medium', 'secondary', 'medium', {type: 'button'})
-//-   +btn('large', 'secondary', 'large', {type: 'button'})
+//-   // Secondary sizes (text only)
+//-   +btn('Cancel', 'secondary', 'small', {type: 'button'})
+//-   +btn('Cancel', 'secondary', 'medium', {type: 'button'})
+//-   +btn('Cancel', 'secondary', 'large', {type: 'button'})
 //-
-//-   // Outline
-//-   +btn('small', 'outline', 'small', {type: 'button'})
-//-   +btn('medium', 'outline', 'medium', {type: 'button'})
-//-   +btn('large', 'outline', 'large', {type: 'button'})
+//-   // Outline variant (text only)
+//-   +btn('More', 'outline', 'small', {type: 'button'})
+//-   +btn('More', 'outline', 'medium', {type: 'button'})
+//-   +btn('More', 'outline', 'large', {type: 'button'})
 //-
-//-   // Button with icon
-//-   +btn('small', 'primary', 'small', {type: 'button'}, 'settings')
-//-   +btn('medium', 'secondary', 'medium', {type: 'button'}, 'settings')
-//-   +btn('large', 'outline', 'large', {type: 'button'}, 'settings')
+//-   // Button with icon and text
+//-   +btn('Settings', 'primary', 'small', {type: 'button'}, 'settings')
+//-   +btn('Settings', 'secondary', 'medium', {type: 'button'}, 'settings')
+//-   +btn('Settings', 'outline', 'large', {type: 'button'}, 'settings')
 //-
-//-   // Text only (text-style variants)
-//-   +btn('small primary', 'text-primary', 'small', {type: 'button'})
-//-   +btn('medium secondary', 'text-secondary', 'medium', {type: 'button'})
+//-   // Text-only style variants
+//-   +btn('Learn more', 'text-primary', 'medium', {type: 'button'})
+//-   +btn('Dismiss', 'text-secondary', 'medium', {type: 'button'})
 //-
-//-   // Icon only (pass null for text and use icon-* variants)
-//--  // You can also add explicit icon size helper classes: icon-small, icon-medium, icon-large
-//-   +btn(null, 'icon-primary', 'icon-medium', {type: 'button'}, 'settings')
-//-   +btn(null, 'icon-secondary', 'icon-medium', {type: 'button'}, 'settings')
-//-   +btn(null, 'icon-outline', 'icon-medium', {type: 'button'}, 'settings')
-//-   +btn(null, 'icon', 'icon-medium', {type: 'button'}, 'settings')
+//-   // Icon-only buttons (pass null for text and use an icon-* variant)
+//-   // Provide aria-label in attrs or rely on mixin fallback to iconName -> label
+//-   +btn(null, 'icon-primary', 'medium', {type: 'button', 'aria-label': 'Settings'}, 'settings')
+//-   +btn(null, 'icon-secondary', 'small', {type: 'button', 'aria-label': 'Close'}, 'close')
+//-   +btn(null, 'icon-outline', 'large', {type: 'button'}, 'menu')
 //-
 //- Keep this docblock updated when you change parameter names, defaults, or
 //- the CSS variants so editor hover comments remain accurate.
 mixin btn(text, variant='primary', size='medium', attrs={'type':'button'}, iconName=null)
   - const hasText = typeof text === 'string' && text.trim().length > 0;
-  - const btnClass = 'btn btn--' + variant;
-  - const btnSize = 'btn--' + size;
-  button(class=btnClass + ' ' + btnSize)&attributes(attrs)
+  - const baseClass = 'btn btn--' + variant + ' btn--' + size;
+  - const incomingClass = attrs && attrs.class ? String(attrs.class).trim() : '';
+  - const combinedClass = (incomingClass ? incomingClass + ' ' : '') + baseClass;
+  - // shallow copy attrs so we don't mutate caller object
+  - const safeAttrs = Object.assign({}, attrs || {});
+  - // ensure class is present in the attrs we pass to &attributes
+  - safeAttrs.class = combinedClass;
+  - // accessibility fallback for icon-only buttons
+  - if (!hasText && iconName && !(safeAttrs['aria-label'] || safeAttrs['ariaLabel'] || safeAttrs['aria-labelledby'])) {
+  -   safeAttrs['aria-label'] = iconName.replace(/[-_]/g, ' ');
+  - }
+  button&attributes(safeAttrs)
     if iconName
-      svg.button-icon(class='icon--' + size role='img' aria-label=iconName)
+      - // build svgAttrs as a plain object without undefined values
+      - const svgAttrs = Object.assign(
+      -   {},
+      -   hasText ? { 'aria-hidden': 'true' } : { role: 'img' },
+      -   { class: 'button-icon icon--' + size }
+      - );
+      svg&attributes(svgAttrs)
         use(xlink:href='#icon-' + iconName, href='#icon-' + iconName)
     if hasText
       | #{text}
