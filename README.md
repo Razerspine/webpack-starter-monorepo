@@ -29,7 +29,7 @@ src/
 │   ├── images/         # Images and icons
 │   ├── scripts/        # JS modules (entry: app.js)
 │   └── styles/         # SCSS files
-│       ├── framework/  # Core logic (grid, theme variables)
+│       ├── ui-kit/     # Core logic (grid, theme variables)
 │       └── ...
 ├── views/
 │   ├── layout/         # Main layout templates (header / aside / main / footer)
