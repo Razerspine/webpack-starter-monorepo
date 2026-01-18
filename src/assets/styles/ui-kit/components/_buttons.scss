@@ -32,13 +32,13 @@
   }
 
   &--secondary {
-    background: var(--slate-400);
-    border-color: var(--slate-400);
+    background: var(--slate-500);
+    border-color: var(--slate-500);
     color: var(--text-on-brand);
 
     &:not([disabled]):not(.is-disabled):hover {
-      background: var(--slate-500);
-      border-color: var(--slate-500);
+      background: var(--slate-700);
+      border-color: var(--slate-700);
     }
   }
 
@@ -97,13 +97,13 @@
 
     &-secondary {
       padding: 0;
-      background: var(--slate-400);
-      border-color: var(--slate-400);
+      background: var(--slate-500);
+      border-color: var(--slate-500);
       color: var(--text-on-brand);
 
       &:not([disabled]):not(.is-disabled):hover {
-        background: var(--slate-500);
-        border-color: var(--slate-500);
+        background: var(--slate-700);
+        border-color: var(--slate-700);
       }
     }
 
