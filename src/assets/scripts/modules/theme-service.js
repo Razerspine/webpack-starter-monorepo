@@ -36,7 +36,7 @@ export default class ThemeService {
     /** @private */
     this.fallback = fallback === 'dark' ? 'dark' : 'light';
 
-    /** @private {'dark'|'light'} */
+    /** @private {'dark'|'light'|null} */
     this.current = null;
 
     /** @private {Set<Function>} */
