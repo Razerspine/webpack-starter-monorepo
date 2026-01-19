@@ -8,7 +8,8 @@
  * @example
  * import en from '../../i18n/en.json';
  * import uk from '../../i18n/uk.json';
- * const translationService = new TranslationService({ en, uk }, 'en');
+*  const locales = {en, uk};
+ * const translationService = new TranslationService(locales, 'en');
  * translationService.init();
  */
 export default class TranslationService {
