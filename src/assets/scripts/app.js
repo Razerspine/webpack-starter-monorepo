@@ -8,7 +8,7 @@ import uk from '../i18n/uk.json';
   const logger = new ConsoleLogger();
   const locales = {en, uk};
   const translationService = new TranslationService(locales, 'en');
-  const themeService = new ThemeService({storageKey: 'w-theme', autoApply: true});
+  const themeService = new ThemeService({storageKey: 'theme', autoApply: true});
 
   logger.success('app.js successfully initialized and is now active!');
 

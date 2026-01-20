@@ -67,7 +67,7 @@
 mixin dataTable(items, columns, options)
   - const _items = Array.isArray(items) ? items : [];
   - const cols = Array.isArray(columns) && columns.length ? columns : Array.from(new Set(_items.reduce((acc, it) => acc.concat(Object.keys(it || {})), [])));
-  - const opts = Object.assign({ emptyText: 'No data', showIndex: false, showActions: true, formatters: {}, labels: {} }, options || {});
+  - const opts = Object.assign({ emptyText: 'No data', showIndex: false, showActions: false, formatters: {}, labels: {} }, options || {});
 
   - const humanize = function(key) {
   -   if (!key && key !== 0) return '';
