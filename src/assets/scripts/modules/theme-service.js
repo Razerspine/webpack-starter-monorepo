@@ -14,11 +14,10 @@
  * - dataAttribute: attribute name to set on root when autoApply is true (default 'data-theme')
  */
 export default class ThemeService {
-  static DEFAULT_KEY = 'theme';
 
   constructor(options = {}) {
     const {
-      storageKey = ThemeService.DEFAULT_KEY,
+      storageKey = 'theme',
       storage = (typeof localStorage !== 'undefined' ? localStorage : null),
       autoApply = true,
       dataAttribute = 'data-theme',
@@ -46,6 +45,7 @@ export default class ThemeService {
   /**
    * Initialize service: determine and apply initial theme.
    * Safe to call multiple times.
+   * @public
    */
   init() {
     const initial = this._getStoredTheme() || this._detectSystemTheme() || this.fallback;
@@ -55,6 +55,7 @@ export default class ThemeService {
   /**
    * Get current theme
    * @returns {'dark'|'light'|null}
+   * @public
    */
   getTheme() {
     return this.current;
@@ -63,6 +64,7 @@ export default class ThemeService {
   /**
    * Set theme programmatically
    * @param {'dark'|'light'} theme
+   * @public
    */
   setTheme(theme) {
     if (theme !== 'dark' && theme !== 'light') return;
@@ -74,6 +76,7 @@ export default class ThemeService {
    * callback receives new theme string.
    * @param {Function} cb
    * @returns {Function}
+   * @public
    */
   onChange(cb) {
     if (typeof cb !== 'function') return () => {
@@ -84,6 +87,7 @@ export default class ThemeService {
 
   /**
    * Remove all listeners and reset state
+   * @public
    */
   destroy() {
     this._listeners.clear();
@@ -93,6 +97,7 @@ export default class ThemeService {
   /**
    * Internal: apply theme to state, persist, notify and optionally apply to DOM
    * options: { persist: boolean, notify: boolean, applyToDom: boolean }
+   * @private
    */
   _apply(theme, {persist = true, notify = true, applyToDom = true} = {}) {
     if (!theme || (theme !== 'dark' && theme !== 'light')) return;
@@ -124,6 +129,7 @@ export default class ThemeService {
   /**
    * Read stored theme from storage safely
    * @returns {'dark'|'light'|null}
+   * @private
    */
   _getStoredTheme() {
     if (!this.storage) return null;
@@ -138,6 +144,7 @@ export default class ThemeService {
   /**
    * Persist theme to storage safely
    * @param {'dark'|'light'} theme
+   * @private
    */
   _saveTheme(theme) {
     if (!this.storage) return;
@@ -151,6 +158,7 @@ export default class ThemeService {
   /**
    * Detect system preference for dark mode
    * @returns {'dark'|'light'|null}
+   * @private
    */
   _detectSystemTheme() {
     try {
