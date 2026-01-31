@@ -1,36 +1,44 @@
 import path from 'path';
-import { askQuestions } from './cli';
+import { getCliContext } from './cli';
 import { templates } from './templates';
 import { copyTemplate } from './copier';
 import { installDeps } from './installer';
 import { log } from './logger';
 
-// helper to get repo root
 function getRepoRoot() {
     return path.resolve(__dirname, '../../../');
 }
 
 async function run() {
     try {
-        const { projectName, template } = await askQuestions();
+        const {
+            projectName,
+            template,
+            noInstall,
+            dryRun
+        } = await getCliContext();
 
         const targetDir = path.resolve(process.cwd(), projectName);
         const repoRoot = getRepoRoot();
+        const templatePath = path.join(repoRoot, templates[template].path);
 
-        const templatePath = path.join(
-            repoRoot,
-            templates[template].path
-        );
+        log.info(`Creating project: ${projectName}`);
+        log.info(`Template: ${template}`);
 
-        log.info(`Creating project in ${projectName}...`);
-        await copyTemplate(templatePath, targetDir);
+        if (dryRun) {
+            log.info('[dry-run] Would copy template');
+        } else {
+            await copyTemplate(templatePath, targetDir);
+        }
 
-        log.info('Installing dependencies...');
-        installDeps(targetDir);
+        if (!noInstall && !dryRun) {
+            log.info('Installing dependencies...');
+            installDeps(targetDir);
+        } else {
+            log.info('Skipping install');
+        }
 
         log.success('Done!');
-        log.info(`cd ${projectName}`);
-        log.info('npm run dev');
     } catch (err: any) {
         log.error(err.message);
         process.exit(1);
