@@ -11,6 +11,7 @@ module.exports = (env = {}) => {
     },
 
     resolve: {
+      extensions: ['.ts', '.js'],
       alias: {
         '@views': path.join(process.cwd(), 'src/views/'),
         '@styles': path.join(process.cwd(), 'src/assets/styles/'),
