@@ -1,4 +1,4 @@
-# 🚀 Webpack Starter Kit
+# 🚀 Webpack Starter Kit 
 
 A lightweight, modern, and production-ready boilerplate for building static websites using **Webpack 5**, **Pug**, **SCSS**, and **ES6+**.
 
