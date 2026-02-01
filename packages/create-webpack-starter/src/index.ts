@@ -12,13 +12,18 @@ import {installDeps} from './installer';
 import {log} from './logger';
 
 process.on('SIGINT', () => {
-    console.log('\n❌ Cancelled by user');
-    process.exit(1);
+    log.info('Cancelled');
+    process.exit(130);
 });
 
+/**
+ * dist/index.js → packages/create-webpack-starter/dist
+ * so repo root is 3 levels up
+ */
 function getRepoRoot() {
     return path.resolve(__dirname, '../../../');
 }
+
 
 async function run() {
     const spinner = ora();
@@ -40,7 +45,7 @@ async function run() {
 
         // --- Safety check
         if (!fs.existsSync(templatePath)) {
-            throw new Error(`Template not found: ${templatePath}`);
+            log.error(`Template '${template}' not found`);
         }
 
         // --- Template phase
@@ -65,7 +70,7 @@ async function run() {
 
                 if (!overwrite) {
                     log.info('Cancelled');
-                    return;
+                    process.exit(0);
                 }
 
                 spinner.start('Cleaning target directory...');
@@ -105,4 +110,4 @@ async function run() {
     }
 }
 
-run();
+run().then();
