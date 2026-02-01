@@ -9,6 +9,10 @@
     "style": "scss",
     "script": "ts"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "sass": "1.72.0",
+    "sass-loader": "^14.1.1",
+    "typescript": "^5.9.3",
+    "ts-loader": "^9.5.4"
+  }
 }

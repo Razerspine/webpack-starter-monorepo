@@ -9,6 +9,8 @@
     "style": "scss",
     "script": "js"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "sass": "1.72.0",
+    "sass-loader": "^14.1.1"
+  }
 }

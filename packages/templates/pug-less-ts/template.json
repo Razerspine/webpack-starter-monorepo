@@ -9,6 +9,10 @@
     "style": "less",
     "script": "ts"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "less": "^4.5.1",
+    "less-loader": "^12.3.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3"
+  }
 }
