@@ -37,14 +37,14 @@ async function run() {
         } = await getCliContext();
 
         const targetDir = path.resolve(process.cwd(), projectName);
-        const repoRoot = getRepoRoot();
-        const templatePath = path.join(repoRoot, templates[template].path);
+        const temp = templates[template];
+        const templateFilesPath = temp.filesPath;
 
         log.info(`Creating project: ${projectName}`);
         log.info(`Template: ${template}`);
 
         // --- Safety check
-        if (!fs.existsSync(templatePath)) {
+        if (!fs.existsSync(templateFilesPath)) {
             log.error(`Template '${template}' not found`);
         }
 
@@ -79,7 +79,7 @@ async function run() {
             }
 
             spinner.start('Copying template...');
-            await copyTemplate(templatePath, targetDir);
+            await copyTemplate(templateFilesPath, targetDir);
             spinner.succeed('Template copied');
         }
 

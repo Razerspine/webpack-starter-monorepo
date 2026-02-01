@@ -35,9 +35,9 @@ export async function getCliContext(): Promise<{
                 type: 'list',
                 name: 'template',
                 message: 'Choose a template:',
-                choices: Object.entries(templates).map(([key, value]) => ({
-                    name: value.description,
-                    value: key
+                choices: Object.values(templates).map(t => ({
+                    name: t.meta.description,
+                    value: t.key
                 }))
             }
         ] as any);
