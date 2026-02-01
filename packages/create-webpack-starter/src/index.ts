@@ -1,15 +1,28 @@
+#!/usr/bin/env node
+
 import path from 'path';
-import { getCliContext } from './cli';
-import { templates } from './templates';
-import { copyTemplate } from './copier';
-import { installDeps } from './installer';
-import { log } from './logger';
+import fs from 'fs-extra';
+import ora from 'ora';
+import inquirer from 'inquirer';
+
+import {getCliContext} from './cli';
+import {templates} from './templates';
+import {copyTemplate} from './copier';
+import {installDeps} from './installer';
+import {log} from './logger';
+
+process.on('SIGINT', () => {
+    console.log('\n❌ Cancelled by user');
+    process.exit(1);
+});
 
 function getRepoRoot() {
     return path.resolve(__dirname, '../../../');
 }
 
 async function run() {
+    const spinner = ora();
+
     try {
         const {
             projectName,
@@ -25,22 +38,69 @@ async function run() {
         log.info(`Creating project: ${projectName}`);
         log.info(`Template: ${template}`);
 
-        if (dryRun) {
-            log.info('[dry-run] Would copy template');
-        } else {
-            await copyTemplate(templatePath, targetDir);
+        // --- Safety check
+        if (!fs.existsSync(templatePath)) {
+            throw new Error(`Template not found: ${templatePath}`);
         }
 
-        if (!noInstall && !dryRun) {
-            log.info('Installing dependencies...');
-            installDeps(targetDir);
+        // --- Template phase
+        if (dryRun) {
+            spinner.stop();
+
+            if (fs.existsSync(targetDir)) {
+                spinner.warn(`[dry-run] Directory "${projectName}" already exists`);
+            }
+
+            spinner.info('[dry-run] Template would be copied');
         } else {
-            log.info('Skipping install');
+            if (fs.existsSync(targetDir)) {
+                const {overwrite} = await inquirer.prompt<{ overwrite: boolean }>([
+                    {
+                        type: 'confirm',
+                        name: 'overwrite',
+                        message: `Directory "${projectName}" already exists. Overwrite?`,
+                        default: false
+                    }
+                ]);
+
+                if (!overwrite) {
+                    log.info('Cancelled');
+                    return;
+                }
+
+                spinner.start('Cleaning target directory...');
+                await fs.remove(targetDir);
+                spinner.succeed('Directory cleaned');
+            }
+
+            spinner.start('Copying template...');
+            await copyTemplate(templatePath, targetDir);
+            spinner.succeed('Template copied');
+        }
+
+        // --- Install phase
+        if (noInstall) {
+            spinner.stop();
+            spinner.info('Skipping install');
+        } else if (dryRun) {
+            spinner.stop();
+            spinner.info('[dry-run] Would install dependencies');
+        } else {
+            spinner.start('Installing dependencies...');
+            await installDeps(targetDir);
+            spinner.succeed('Dependencies installed');
         }
 
         log.success('Done!');
     } catch (err: any) {
-        log.error(err.message);
+        spinner.stop();
+
+        if (err?.message === 'Operation cancelled by user') {
+            console.log('❌ Cancelled');
+            process.exit(1);
+        }
+
+        console.error('❌ Error:', err?.message || err);
         process.exit(1);
     }
 }

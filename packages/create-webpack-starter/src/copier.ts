@@ -1,12 +1,15 @@
 import fs from 'fs-extra';
 
+/**
+ * Copy template directory into target directory.
+ * Assumes targetDir does NOT exist.
+ */
 export async function copyTemplate(
-  templatePath: string,
-  targetDir: string
+    templatePath: string,
+    targetDir: string
 ) {
-  if (fs.existsSync(targetDir)) {
-    throw new Error(`Directory "${targetDir}" already exists`);
-  }
-
-  await fs.copy(templatePath, targetDir);
+    await fs.copy(templatePath, targetDir, {
+        overwrite: true,
+        errorOnExist: false
+    });
 }
