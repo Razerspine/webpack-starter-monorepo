@@ -12,41 +12,23 @@ import {installDeps} from './installer';
 import {log} from './logger';
 import {mergePackageJson} from './package-merger';
 
-process.on('SIGINT', () => {
-    log.info('Cancelled');
-    process.exit(130);
+process.on('unhandledRejection', (err: any) => {
+    if (err?.isTtyError || err?.name === 'ExitPromptError') {
+        log.info('Cancelled by user');
+        process.exit(130);
+    }
 });
-
-/**
- * Resolve repo root when running via ts-node or dist
- */
-function getRepoRoot() {
-    return path.resolve(__dirname, '../../..');
-}
-
-async function resolveProjectName(initial?: string) {
-    if (initial) return initial;
-
-    const {projectName} = await inquirer.prompt<{ projectName: string }>([
-        {
-            type: 'input',
-            name: 'projectName',
-            message: 'Project name:',
-            validate: (v) => !!v || 'Project name is required'
-        }
-    ]);
-
-    return projectName;
-}
 
 async function run() {
     const spinner = ora();
 
     try {
-        const ctx = await getCliContext();
-
-        const projectName = await resolveProjectName(ctx.projectName);
-        const templateKey = ctx.template;
+        const {
+            projectName,
+            template: templateKey,
+            noInstall,
+            dryRun
+        } = await getCliContext();
 
         const template = templates[templateKey];
         if (!template) {
@@ -62,11 +44,17 @@ async function run() {
         log.info(`Creating project: ${projectName}`);
         log.info(`Template: ${templateKey}`);
 
-        // --- Copy template
-        if (ctx.dryRun) {
+        // --- Copy template (SAFE)
+        if (dryRun) {
+            if (fs.existsSync(targetDir)) {
+                spinner.warn(`[dry-run] Directory "${projectName}" already exists`);
+            }
             spinner.info('[dry-run] Template would be copied');
         } else {
+            // ⛔ overwrite decision happens ONLY here
             if (fs.existsSync(targetDir)) {
+                spinner.stop();
+
                 const {overwrite} = await inquirer.prompt<{ overwrite: boolean }>([
                     {
                         type: 'confirm',
@@ -77,7 +65,7 @@ async function run() {
                 ]);
 
                 if (!overwrite) {
-                    log.info('Cancelled');
+                    log.info('Cancelled by user');
                     process.exit(0);
                 }
 
@@ -92,12 +80,12 @@ async function run() {
         }
 
         // --- Merge dependencies
-        if (!ctx.dryRun && template.meta) {
+        if (!dryRun && template.meta) {
             const {dependencies, devDependencies} = template.meta;
 
             if (
-                (dependencies && Object.keys(dependencies).length) ||
-                (devDependencies && Object.keys(devDependencies).length)
+                (dependencies && Object.keys(dependencies).length > 0) ||
+                (devDependencies && Object.keys(devDependencies).length > 0)
             ) {
                 spinner.start('Merging template dependencies...');
                 await mergePackageJson(targetDir, {
@@ -108,8 +96,8 @@ async function run() {
             }
         }
 
-        // --- Script cleanup
-        if (!ctx.dryRun && template.meta?.features?.script) {
+        // --- Script cleanup (JS vs TS)
+        if (!dryRun && template.meta?.features?.script) {
             const pkgPath = path.join(targetDir, 'package.json');
             const pkg = await fs.readJson(pkgPath);
 
@@ -133,9 +121,9 @@ async function run() {
         }
 
         // --- Install deps
-        if (ctx.noInstall) {
+        if (noInstall) {
             spinner.info('Skipping install');
-        } else if (ctx.dryRun) {
+        } else if (dryRun) {
             spinner.info('[dry-run] Would install dependencies');
         } else {
             spinner.start('Installing dependencies...');

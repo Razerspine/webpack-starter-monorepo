@@ -17,18 +17,34 @@ export async function getCliContext(): Promise<{
     const program = new Command();
 
     program
-        .argument('[project-name]', 'Project name', 'my-app')
+        .argument('[project-name]', 'Project name')
         .option('-t, --template <template>', 'Template name')
         .option('--no-install', 'Skip npm install')
         .option('--dry-run', 'Do not write files');
 
     program.parse(process.argv);
 
-    const projectName = program.args[0];
     const options = program.opts<CliOptions>();
 
-    let template = options.template;
+    let projectName = program.args[0] as string | undefined;
 
+    // --- ASK PROJECT NAME IF NOT PROVIDED
+    if (!projectName) {
+        const answer = await inquirer.prompt<{ projectName: string }>([
+            {
+                type: 'input',
+                name: 'projectName',
+                message: 'Project name:',
+                validate: v => !!v || 'Project name is required'
+            }
+        ]);
+
+        projectName = answer.projectName;
+    }
+
+    let template: TemplateKey | undefined = options.template;
+
+    // --- ASK TEMPLATE IF NOT PROVIDED
     if (!template) {
         const answer = await inquirer.prompt<{ template: TemplateKey }>([
             {
@@ -40,12 +56,12 @@ export async function getCliContext(): Promise<{
                     value: t.key
                 }))
             }
-        ] as any);
+        ]);
 
         template = answer.template;
     }
 
-    if (!templates[template]) {
+    if (!template || !templates[template]) {
         throw new Error(`Unknown template: ${template}`);
     }
 

@@ -8,8 +8,5 @@ export async function copyTemplate(
     templatePath: string,
     targetDir: string
 ) {
-    await fs.copy(templatePath, targetDir, {
-        overwrite: true,
-        errorOnExist: false
-    });
+    await fs.copy(templatePath, targetDir);
 }
