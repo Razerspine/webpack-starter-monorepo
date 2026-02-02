@@ -18,37 +18,52 @@ process.on('SIGINT', () => {
 });
 
 /**
- * dist/index.js → packages/create-webpack-starter/dist
- * repo root = 3 levels up
+ * Resolve repo root when running via ts-node or dist
  */
 function getRepoRoot() {
-    return path.resolve(__dirname, '../../../');
+    return path.resolve(__dirname, '../../..');
+}
+
+async function resolveProjectName(initial?: string) {
+    if (initial) return initial;
+
+    const {projectName} = await inquirer.prompt<{ projectName: string }>([
+        {
+            type: 'input',
+            name: 'projectName',
+            message: 'Project name:',
+            validate: (v) => !!v || 'Project name is required'
+        }
+    ]);
+
+    return projectName;
 }
 
 async function run() {
     const spinner = ora();
 
     try {
-        const {
-            projectName,
-            template: templateKey,
-            noInstall,
-            dryRun
-        } = await getCliContext();
+        const ctx = await getCliContext();
+
+        const projectName = await resolveProjectName(ctx.projectName);
+        const templateKey = ctx.template;
+
+        const template = templates[templateKey];
+        if (!template) {
+            throw new Error(`Unknown template: ${templateKey}`);
+        }
+
+        if (!template.filesPath) {
+            throw new Error(`Template '${templateKey}' has no filesPath`);
+        }
 
         const targetDir = path.resolve(process.cwd(), projectName);
-        const template = templates[templateKey];
 
         log.info(`Creating project: ${projectName}`);
         log.info(`Template: ${templateKey}`);
 
-        // --- Safety check
-        if (!fs.existsSync(template.filesPath)) {
-            throw new Error(`Template '${templateKey}' not found`);
-        }
-
-        // --- Copy template files
-        if (dryRun) {
+        // --- Copy template
+        if (ctx.dryRun) {
             spinner.info('[dry-run] Template would be copied');
         } else {
             if (fs.existsSync(targetDir)) {
@@ -76,13 +91,13 @@ async function run() {
             spinner.succeed('Template copied');
         }
 
-        // --- Merge dependencies from template.meta
-        if (!dryRun && template.meta) {
+        // --- Merge dependencies
+        if (!ctx.dryRun && template.meta) {
             const {dependencies, devDependencies} = template.meta;
 
             if (
-                (dependencies && Object.keys(dependencies).length > 0) ||
-                (devDependencies && Object.keys(devDependencies).length > 0)
+                (dependencies && Object.keys(dependencies).length) ||
+                (devDependencies && Object.keys(devDependencies).length)
             ) {
                 spinner.start('Merging template dependencies...');
                 await mergePackageJson(targetDir, {
@@ -93,40 +108,34 @@ async function run() {
             }
         }
 
-        // --- Script cleanup (JS vs TS)
-        if (!dryRun && template.meta?.features?.script) {
-            const script = template.meta.features.script;
-
+        // --- Script cleanup
+        if (!ctx.dryRun && template.meta?.features?.script) {
             const pkgPath = path.join(targetDir, 'package.json');
             const pkg = await fs.readJson(pkgPath);
 
-            if (script === 'ts') {
-                // ❌ Remove Babel for TS templates
+            if (template.meta.features.script === 'ts') {
                 delete pkg.devDependencies?.['@babel/core'];
                 delete pkg.devDependencies?.['@babel/preset-env'];
                 delete pkg.devDependencies?.['babel-loader'];
 
-                // ❌ Remove babel config files
                 await fs.remove(path.join(targetDir, '.babelrc'));
                 await fs.remove(path.join(targetDir, 'babel.config.js'));
             }
 
-            if (script === 'js') {
-                // ❌ Remove TypeScript for JS templates
+            if (template.meta.features.script === 'js') {
                 delete pkg.devDependencies?.['typescript'];
                 delete pkg.devDependencies?.['ts-loader'];
 
-                // ❌ Remove tsconfig
                 await fs.remove(path.join(targetDir, 'tsconfig.json'));
             }
 
             await fs.writeJson(pkgPath, pkg, {spaces: 2});
         }
 
-        // --- Install phase
-        if (noInstall) {
+        // --- Install deps
+        if (ctx.noInstall) {
             spinner.info('Skipping install');
-        } else if (dryRun) {
+        } else if (ctx.dryRun) {
             spinner.info('[dry-run] Would install dependencies');
         } else {
             spinner.start('Installing dependencies...');

@@ -3,16 +3,32 @@
   "version": "0.1.0",
   "description": "Create a webpack starter with Pug, SCSS, TS and more",
   "bin": {
-    "create-webpack-starter": "dist/index.js"
+    "create-webpack-starter": "bin/index.js"
   },
-  "private": true,
   "files": [
+    "bin",
     "dist"
   ],
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node src/index.ts"
+    "dev": "ts-node src/index.ts",
+    "prepublishOnly": "npm run build"
   },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "webpack",
+    "starter",
+    "cli",
+    "pug",
+    "scss",
+    "less",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Razerspine",
+  "license": "MIT",
   "dependencies": {
     "commander": "^12.0.0",
     "fs-extra": "^11.2.0",
@@ -22,8 +38,6 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
-    "@types/inquirer": "^9.0.9",
-    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
 }
