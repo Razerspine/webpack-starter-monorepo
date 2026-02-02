@@ -38,8 +38,9 @@ Generated projects are yours forever.
 
 ## Development
 
-Install dependencies:
+This repository uses npm workspaces.
 
+Install all workspace dependencies:
 ```bash
 npm install
 ```
@@ -51,7 +52,13 @@ npm run build
 ```
 
 Local CLI testing:
+
 ```bash
 npm run dev:cli
 ```
 
+End users should use
+
+```bash
+npx create-webpack-starter
+```
