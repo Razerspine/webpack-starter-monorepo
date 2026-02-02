@@ -1,11 +1,9 @@
 {
   "name": "webpack-starter-monorepo",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": ["packages/*"],
   "scripts": {
-    "dev": "npm --prefix starter-source start",
-    "build": "npm --prefix starter-source run build"
+    "build": "npm run build -ws",
+    "dev:cli": "npm run dev -w create-webpack-starter"
   }
 }

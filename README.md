@@ -52,7 +52,6 @@ npm run build
 
 Local CLI testing:
 ```bash
-cd packages/create-webpack-starter
-npm run dev
+npm run dev:cli
 ```
 
