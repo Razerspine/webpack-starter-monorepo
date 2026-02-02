@@ -1,6 +1,6 @@
 {
   "name": "create-webpack-starter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a webpack starter with Pug, SCSS, TS and more",
   "bin": {
     "create-webpack-starter": "bin/index.js"
@@ -38,6 +38,8 @@
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
+    "@types/inquirer": "^9.0.9",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   }
 }
