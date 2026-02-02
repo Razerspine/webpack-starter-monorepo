@@ -1,7 +1,4 @@
-include @views/mixins/btn.pug
-include @views/mixins/single-select.pug
-
-- const logoTitle = 'webpack starter kit';
+- const logoTitle = 'Webpack starter template';
 
 header.header
   .header__row
@@ -9,19 +6,3 @@ header.header
       .logo
         img.logo__icon(src='@images/logo.svg' alt='logo' loading='lazy')
         span.logo__title #{logoTitle}
-    .header__col.header__col--space
-      +btn(
-        null,
-        'icon',
-        'icon-medium',
-        {
-          type: 'button',
-          id: 'themeSwitcher',
-          'aria-label': 'Toggle theme'
-        },
-        'light-mode'
-      )
-      +singleSelect('languageSwitcher', null, [
-        {value: 'en', label: 'EN'},
-        {value: 'uk', label: 'UK'}
-      ], 'label', 'value', 'en', null)
