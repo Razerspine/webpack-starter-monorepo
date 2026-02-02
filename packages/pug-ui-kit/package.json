@@ -1,0 +1,25 @@
+{
+  "name": "@razerspine/pug-ui-kit",
+  "version": "1.0.0",
+  "description": "Shared Pug mixins for Webpack Starter templates",
+  "main": "index.js",
+  "files": [
+    "mixins",
+    "index.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "Razerspine",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Razerspine/webpack-starter-monorepo",
+    "directory": "packages/pug-ui-kit"
+  },
+  "bugs": {
+    "url": "https://github.com/Razerspine/webpack-starter-monorepo/issues"
+  },
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  }
+}
