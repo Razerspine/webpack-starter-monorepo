@@ -56,3 +56,8 @@ If you wish to use a custom font path (e.g., a CDN or a different local folder),
 @font-path: "/my-custom-path/fonts";
 @import "@razerspine/pug-ui-kit/less/ui-kit.less";
 ```
+
+## [1.2.1] - 2026-02-03
+
+### Fixed
+- **SCSS Scope**: Fixed "Undefined variable" error in `_fonts.scss` by explicitly importing settings module via `@use`.
