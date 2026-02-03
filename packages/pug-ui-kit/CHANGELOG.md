@@ -29,3 +29,30 @@ You should now update to:
 ### Added
 - **Styles**: Full SCSS and LESS support for all UI components.
 - **Architecture**: Added global settings, grid system, and themes (light/dark).
+
+## [1.2.0] - 2026-02-03
+### Added
+- **Fonts**: Added local Roboto font family (Thin, Light, Regular, Medium, Bold, Black) directly into the package.
+- **Variables**: Introduced $font-path (SCSS) and @font-path (LESS) variables to manage font asset resolution dynamically.
+- **Styles**: Integrated @font-face declarations in base/_fonts.scss and base/_fonts.less
+
+### Fixed
+- **Assets**: Resolved "Module not found" errors in Webpack by using tilde-prefixed paths (~) for internal asset resolution.
+
+### Migration Guide (Optional)
+By default, the kit now looks for fonts inside the package. 
+If you wish to use a custom font path (e.g., a CDN or a different local folder), override the path variable before importing the kit:
+
+#### SCSS:
+
+```scss
+@use "@razerspine/pug-ui-kit/scss/settings" with (
+  $font-path: "/my-custom-path/fonts"
+);
+```
+#### LESS:
+
+```less
+@font-path: "/my-custom-path/fonts";
+@import "@razerspine/pug-ui-kit/less/ui-kit.less";
+```

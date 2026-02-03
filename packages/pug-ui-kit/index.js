@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   paths: {
+    fonts: path.join(__dirname, 'fonts'),
     scss: path.join(__dirname, 'scss'),
     less: path.join(__dirname, 'less'),
     mixins: path.join(__dirname, 'mixins')
