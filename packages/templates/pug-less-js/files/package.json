@@ -28,6 +28,6 @@
     "webpack-merge": "^5.10.0"
   },
   "dependencies": {
-    "@razerspine/pug-ui-kit": "^1.2.0"
+    "@razerspine/pug-ui-kit": "^1.2.1"
   }
 }
