@@ -1,5 +1,6 @@
 const path = require('path');
 const templates = require('./loaders/templates');
+const uiKit = require('@razerspine/pug-ui-kit');
 
 module.exports = (env = {}) => {
   const templatesConfig = templates(env);
@@ -19,12 +20,11 @@ module.exports = (env = {}) => {
         '@fonts': path.join(process.cwd(), 'src/assets/fonts/'),
         '@images': path.join(process.cwd(), 'src/assets/images/'),
         '@icons': path.join(process.cwd(), 'src/assets/icons/'),
+        'pug-ui-kit': uiKit.paths.mixins,
       },
     },
 
-    plugins: [
-      ...templatesConfig.plugins,
-    ],
+    plugins: [...templatesConfig.plugins],
 
     module: {
       rules: [
