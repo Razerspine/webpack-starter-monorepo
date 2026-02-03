@@ -33,6 +33,9 @@ module.exports = {
 
 ### 2. Styles (SCSS/LESS)
 The package provides full styling for all components.
+If you only need specific parts (e.g., just variables and the table), you can import them individually.
+
+Note: Always import settings first, as other components depend on them.
 
 #### For SCSS:
 
