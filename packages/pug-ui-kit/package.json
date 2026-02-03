@@ -1,13 +1,19 @@
 {
   "name": "@razerspine/pug-ui-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shared Pug mixins for Webpack Starter templates",
+  "keywords": [
+    "pug",
+    "components",
+    "mixins"
+  ],
   "main": "index.js",
   "files": [
     "mixins",
     "index.js",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "author": "Razerspine",
   "repository": {
