@@ -24,3 +24,8 @@ You should now update to:
   ]
 })
 ```
+
+## [1.1.0] - 2026-02-03
+### Added
+- **Styles**: Full SCSS and LESS support for all UI components.
+- **Architecture**: Added global settings, grid system, and themes (light/dark).
