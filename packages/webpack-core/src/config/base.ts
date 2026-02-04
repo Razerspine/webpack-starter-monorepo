@@ -13,10 +13,10 @@ export function createBaseConfig(options: ConfigOptionType) {
 
         /**
          * IMPORTANT:
-         * Explicit empty entry to prevent webpack default './src'
-         * PugPlugin controls entry points
+         * Disable default webpack entry (./src)
+         * because entry is fully controlled by pug-plugin
          */
-        entry: {},
+        entry: () => ({}),
 
         output: {
             clean: true,
