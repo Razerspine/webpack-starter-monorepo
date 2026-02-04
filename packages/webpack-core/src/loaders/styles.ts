@@ -1,7 +1,7 @@
-import {LoaderType} from '../types/loader-type';
+import {ConfigOptionType} from '../types/config-option-type';
 
-export function stylesLoader(env: LoaderType) {
-    const isLess = env.style === 'less';
+export function stylesLoader(env: ConfigOptionType) {
+    const isLess = env.styles === 'less';
 
     return {
         test: isLess ? /\.(css|less)$/ : /\.(css|scss|sass)$/,

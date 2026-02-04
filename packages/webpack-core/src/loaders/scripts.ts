@@ -1,7 +1,7 @@
-import {LoaderType} from '../types/loader-type';
+import {ConfigOptionType} from '../types/config-option-type';
 
-export function scriptsLoader(env: LoaderType) {
-    if (env.script === 'ts') {
+export function scriptsLoader(env: ConfigOptionType) {
+    if (env.scripts === 'ts') {
         return {
             test: /\.ts$/,
             exclude: /node_modules/,

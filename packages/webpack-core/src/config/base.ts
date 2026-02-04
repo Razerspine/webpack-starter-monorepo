@@ -1,42 +1,34 @@
-import path from 'path';
-import {LoaderType} from '../types/loader-type';
-
 import {assetsLoader} from '../loaders/assets';
 import {scriptsLoader} from '../loaders/scripts';
 import {stylesLoader} from '../loaders/styles';
 import {templatesLoader} from '../loaders/templates';
+import {ModeType} from '../types/mode-type';
+import {ConfigOptionType} from '../types/config-option-type';
 
-export function createBaseConfig(options: {
-    root: string;
-    env: LoaderType;
-    templates?: {
-        entry?: string;
-    };
-}) {
-    const {root, env} = options;
+export function createBaseConfig(options: ConfigOptionType) {
+    const mode: ModeType = options.mode ?? 'development';
 
     return {
-        mode: env.mode,
+        mode,
 
-        context: root,
+        entry: undefined,
 
         output: {
-            path: path.join(root, 'dist'),
-            clean: true
+            clean: true,
         },
 
         module: {
             rules: [
                 assetsLoader(),
-                scriptsLoader(env),
-                stylesLoader(env)
+                scriptsLoader(options),
+                stylesLoader(options)
             ]
         },
 
         plugins: [
             ...templatesLoader({
                 entry: options.templates?.entry,
-                mode: env.mode
+                mode: options.mode
             })
         ],
 
