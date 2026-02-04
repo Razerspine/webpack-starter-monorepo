@@ -1,6 +1,6 @@
 # @razerspine/webpack-core
 
-Core webpack configuration and loaders used by Razerspine templates.
+Core webpack configurations and loaders for starter templates
 
 ## Features
 
