@@ -1,0 +1,28 @@
+{
+  "name": "@razerspine/webpack-core",
+  "version": "1.0.0",
+  "description": "Core webpack config and loaders for starter templates",
+  "license": "ISC",
+  "author": "Razerspine",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "webpack": "^5"
+  },
+  "dependencies": {
+    "pug-plugin": "^5.0.3"
+  },
+
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3"
+  }
+}
