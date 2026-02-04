@@ -20,9 +20,9 @@
   "dependencies": {
     "pug-plugin": "^5.0.3"
   },
-
   "devDependencies": {
     "@types/node": "^20.11.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "webpack-dev-server": "^5.2.3"
   }
 }

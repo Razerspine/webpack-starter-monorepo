@@ -15,3 +15,10 @@
 
 ### Internal
 - Clarified responsibility between webpack entry and PugPlugin entry
+
+
+## [1.0.4] - 2026-02-04
+
+### Fixed
+- Fixed TypeScript typing for webpack-dev-server configuration
+- Properly extended webpack Configuration with devServer types
