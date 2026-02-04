@@ -11,7 +11,12 @@ export function createBaseConfig(options: ConfigOptionType) {
     return {
         mode,
 
-        entry: undefined,
+        /**
+         * IMPORTANT:
+         * Explicit empty entry to prevent webpack default './src'
+         * PugPlugin controls entry points
+         */
+        entry: {},
 
         output: {
             clean: true,
@@ -21,19 +26,19 @@ export function createBaseConfig(options: ConfigOptionType) {
             rules: [
                 assetsLoader(),
                 scriptsLoader(options),
-                stylesLoader(options)
-            ]
+                stylesLoader(options),
+            ],
         },
 
         plugins: [
             ...templatesLoader({
                 entry: options.templates?.entry,
-                mode: options.mode
-            })
+                mode,
+            }),
         ],
 
         resolve: {
-            extensions: ['.ts', '.tsx', '.js', '.json']
-        }
+            extensions: ['.ts', '.tsx', '.js', '.json'],
+        },
     };
 }

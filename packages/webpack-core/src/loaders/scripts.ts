@@ -8,15 +8,15 @@ export function scriptsLoader(env: ConfigOptionType) {
             use: {
                 loader: 'ts-loader',
                 options: {
-                    transpileOnly: env.mode === 'development'
-                }
-            }
+                    transpileOnly: env.mode === 'development',
+                },
+            },
         };
     }
 
     return {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'babel-loader',
     };
 }

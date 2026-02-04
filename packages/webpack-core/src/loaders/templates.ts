@@ -18,15 +18,15 @@ export function templatesLoader(options: {
                 filename:
                     options.mode === 'production'
                         ? 'js/[name].[contenthash:8].js'
-                        : 'js/[name].js'
+                        : 'js/[name].js',
             },
 
             css: {
                 filename:
                     options.mode === 'production'
                         ? 'css/[name].[contenthash:8].css'
-                        : 'css/[name].css'
-            }
-        })
+                        : 'css/[name].css',
+            },
+        }),
     ];
 }
