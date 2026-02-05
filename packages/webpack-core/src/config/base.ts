@@ -33,8 +33,7 @@ export function createBaseConfig(options: ConfigOptionType) {
         plugins: [
             ...templatesLoader({
                 entry: options.templates?.entry,
-                mode,
-                aliases: options.resolve?.alias ?? {},
+                mode
             }),
         ],
 

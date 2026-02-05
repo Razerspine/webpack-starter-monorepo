@@ -3,7 +3,6 @@ import PugPlugin from 'pug-plugin';
 export function templatesLoader(options: {
     entry?: string;
     mode: 'development' | 'production';
-    aliases?: Record<string, string> | {};
 }) {
     return [
         new PugPlugin({
@@ -27,11 +26,7 @@ export function templatesLoader(options: {
                     options.mode === 'production'
                         ? 'css/[name].[contenthash:8].css'
                         : 'css/[name].css',
-            },
-
-            resolve: {
-                alias: options.aliases,
-            },
+            }
         }),
     ];
 }

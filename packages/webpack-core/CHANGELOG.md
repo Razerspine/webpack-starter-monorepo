@@ -43,3 +43,8 @@
 - Fixed Pug asset resolution in production mode
 - Passed webpack resolve.alias to pug-plugin resolver
 - Ensured consistent alias behavior between development and production builds
+
+## [1.0.8] - 2026-02-05
+
+### Fixed
+- Fix webpack resolve.alias
