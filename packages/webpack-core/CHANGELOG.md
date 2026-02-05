@@ -60,3 +60,8 @@
 
 ### Fixed
 - fix base config for build production
+
+## [1.1.1] - 2026-02-05
+
+### Fixed
+- fix pug plugin for template loader

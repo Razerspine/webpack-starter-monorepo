@@ -1,4 +1,5 @@
 import PugPlugin from 'pug-plugin';
+import path from 'path';
 
 export function templatesLoader(options: {
     entry?: string;
@@ -6,7 +7,11 @@ export function templatesLoader(options: {
 }) {
     return [
         new PugPlugin({
-            entry: options.entry ?? 'src/views/pages',
+            entry: path.resolve(process.cwd(), options.entry ?? 'src/views/pages/'),
+
+            loaderOptions: {
+                root: path.resolve(process.cwd(), 'src'),
+            },
 
             filename: ({chunk}: any) => {
                 let [name] = chunk.name.split('/');
