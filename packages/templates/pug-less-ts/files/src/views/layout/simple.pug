@@ -1,10 +1,10 @@
 extends _simple
 
 append head
-  link(rel='stylesheet' href='@styles/main.less')
+  link(rel='stylesheet' href=require('@styles/main.less'))
 
 append head
-  script(defer src='@scripts/app.ts')
+  script(defer src=require('@scripts/app.ts'))
 
 block body
   include _header
