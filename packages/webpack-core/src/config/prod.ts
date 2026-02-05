@@ -8,6 +8,13 @@ export function createProdConfig(
         devtool: 'source-map',
         optimization: {
             minimize: true,
-        }
+            // ⚠️ splitChunks deliberately disabled
+            // pug-plugin manages assets & entries itself
+            splitChunks: false,
+            runtimeChunk: false,
+        },
+        performance: {
+            hints: false,
+        },
     });
 }
