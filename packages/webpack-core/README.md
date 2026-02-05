@@ -1,60 +1,34 @@
 # @razerspine/webpack-core
 
+Core webpack configuration and loaders for modern **Pug-based** projects.
 
-Core webpack configuration and loaders for modern Pug-based projects.
+This package provides a stable, production-safe webpack foundation designed
+to work seamlessly with `pug-plugin` and template-driven builds.
+
+---
 
 ## Designed for
 
-This package is developed as part of the
+This package is developed as part of the  
 [Webpack Starter Monorepo](https://github.com/Razerspine/webpack-starter-monorepo).
 
-It provides shared webpack configuration and loaders used by the
-starter templates, but can also be used independently in custom setups.
+It contains shared webpack configuration and loaders used by the starter
+templates, but **can also be used independently** in custom setups.
+
+---
 
 ## Features
 
-- Pug templates support
-- JS / TS scripts
-- SCSS / Less styles
-- Environment-aware loaders
-- No aliases or UI-kit hardcoded
+- ✅ Pug templates support (via `pug-plugin`)
+- ✅ JavaScript / TypeScript scripts
+- ✅ SCSS / Less styles
+- ✅ Environment-aware configuration
+- ✅ No hardcoded aliases or UI-kit dependencies
+- ✅ Production-safe defaults (no aggressive chunk splitting)
+
+---
 
 ## Installation
+
 ```bash
-npm i @razerspine/webpack-core
-```
-
-## Usage
-
-```js
-const {
-  createBaseConfig,
-  createDevConfig,
-  createProdConfig
-} = require('@razerspine/webpack-core');
-
-module.exports = (env, argv) => {
-  const mode = argv.mode || 'development';
-
-  return {
-    ...createBaseConfig({
-      root: process.cwd(),
-      env: {
-        mode,
-        script: 'js',
-        style: 'scss'
-      },
-      templates: {
-        entry: 'src/views/pages'
-      }
-    }),
-
-    ...(mode === 'development'
-      ? createDevConfig()
-      : createProdConfig())
-  };
-};
-```
-
-## 📄 License
-This project is licensed under the ISC License.
+npm install @razerspine/webpack-core

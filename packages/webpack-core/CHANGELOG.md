@@ -8,6 +8,14 @@ required to ensure correct behavior in both development and production modes.
 
 ---
 
+## [1.1.6] - 2026-02-05
+
+### Changed
+- Updated `package.json` metadata (keywords, published files)
+- Updated `README.md`
+
+---
+
 ## [1.1.5] - 2026-02-05
 
 ### Fixed
