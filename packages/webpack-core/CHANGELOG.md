@@ -75,3 +75,8 @@
 
 ### Fixed
 - another fix for production config
+
+## [1.1.4] - 2026-02-05
+
+### Fixed
+- another fix for production config

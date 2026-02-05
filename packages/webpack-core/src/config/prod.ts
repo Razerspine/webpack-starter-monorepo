@@ -5,19 +5,9 @@ export function createProdConfig(
     baseConfig: Configuration
 ): Configuration {
     return merge(baseConfig, {
-        devtool: false,
+        devtool: 'source-map',
         optimization: {
             minimize: true,
-            splitChunks: {
-                cacheGroups: {
-                    styles: {
-                        name: 'styles',
-                        test: /\.(s[ac]ss|less|css)$/,
-                        chunks: 'all',
-                        enforce: true,
-                    },
-                },
-            },
         }
     });
 }
