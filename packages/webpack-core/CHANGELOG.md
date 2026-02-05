@@ -54,3 +54,9 @@
 ### Fixed
 - remove entry from prod config
 - fix prod configuration
+
+
+## [1.1.0] - 2026-02-05
+
+### Fixed
+- fix base config for build production

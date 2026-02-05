@@ -4,6 +4,7 @@ import {stylesLoader} from '../loaders/styles';
 import {templatesLoader} from '../loaders/templates';
 import {ModeType} from '../types/mode-type';
 import {ConfigOptionType} from '../types/config-option-type';
+import path from 'path';
 
 export function createBaseConfig(options: ConfigOptionType) {
     const mode: ModeType = options.mode ?? 'development';
@@ -11,14 +12,10 @@ export function createBaseConfig(options: ConfigOptionType) {
     return {
         mode,
 
-        /**
-         * IMPORTANT:
-         * Disable default webpack entry (./src)
-         * because entry is fully controlled by pug-plugin
-         */
-        entry: () => ({}),
+        context: process.cwd(),
 
         output: {
+            path: path.join(process.cwd(), 'dist'),
             clean: true,
         },
 
