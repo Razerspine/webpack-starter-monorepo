@@ -5,10 +5,10 @@ append variables
 append head
 
 append style
-  link(rel='stylesheet' href='@styles/main.less')
+  link(rel='stylesheet' href=require('@styles/main.less'))
 
 append head
-  script(src='@scripts/app.js')
+  script(src=require('@scripts/app.js'))
 
 block body
   include _header
