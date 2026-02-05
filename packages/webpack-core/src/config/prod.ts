@@ -9,7 +9,14 @@ export function createProdConfig(
         optimization: {
             minimize: true,
             splitChunks: {
-                chunks: 'all',
+                cacheGroups: {
+                    styles: {
+                        name: 'styles',
+                        test: /\.(s[ac]ss|less|css)$/,
+                        chunks: 'all',
+                        enforce: true,
+                    },
+                },
             },
         }
     });

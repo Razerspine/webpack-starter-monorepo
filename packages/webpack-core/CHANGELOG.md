@@ -70,3 +70,8 @@
 
 ### Fixed
 - another fix for pug-plugin and assets loader
+
+## [1.1.3] - 2026-02-05
+
+### Fixed
+- another fix for production config
