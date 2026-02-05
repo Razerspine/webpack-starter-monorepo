@@ -34,11 +34,13 @@ export function createBaseConfig(options: ConfigOptionType) {
             ...templatesLoader({
                 entry: options.templates?.entry,
                 mode,
+                aliases: options.resolve?.alias ?? {},
             }),
         ],
 
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],
+            alias: options.resolve?.alias ?? {}
         },
     };
 }

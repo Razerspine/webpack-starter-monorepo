@@ -3,12 +3,11 @@ import PugPlugin from 'pug-plugin';
 export function templatesLoader(options: {
     entry?: string;
     mode: 'development' | 'production';
+    aliases?: Record<string, string> | {};
 }) {
     return [
         new PugPlugin({
             entry: options.entry ?? 'src/views/pages',
-
-            baseDir: process.cwd(),
 
             filename: ({chunk}: any) => {
                 let [name] = chunk.name.split('/');
@@ -28,6 +27,10 @@ export function templatesLoader(options: {
                     options.mode === 'production'
                         ? 'css/[name].[contenthash:8].css'
                         : 'css/[name].css',
+            },
+
+            resolve: {
+                alias: options.aliases,
             },
         }),
     ];

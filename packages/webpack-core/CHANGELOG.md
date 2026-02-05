@@ -36,3 +36,10 @@
 - Fixed webpack plugin instance mismatch when used via npm link
 - Moved webpack-dev-server and pug-plugin to peerDependencies
 - Ensured a single webpack instance is used in consumer templates
+
+## [1.0.7] - 2026-02-05
+
+### Fixed
+- Fixed Pug asset resolution in production mode
+- Passed webpack resolve.alias to pug-plugin resolver
+- Ensured consistent alias behavior between development and production builds
