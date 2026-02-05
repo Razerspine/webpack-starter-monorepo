@@ -29,3 +29,10 @@
 - Fixed webpack default entry resolution causing "./src" lookup
 - Explicitly disabled webpack entry to support pug-plugin driven builds
 - Ensured consistent behavior for development and production modes
+
+## [1.0.6] - 2026-02-05
+
+### Fixed
+- Fixed webpack plugin instance mismatch when used via npm link
+- Moved webpack-dev-server and pug-plugin to peerDependencies
+- Ensured a single webpack instance is used in consumer templates

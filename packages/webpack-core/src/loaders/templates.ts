@@ -8,6 +8,8 @@ export function templatesLoader(options: {
         new PugPlugin({
             entry: options.entry ?? 'src/views/pages',
 
+            baseDir: process.cwd(),
+
             filename: ({chunk}: any) => {
                 let [name] = chunk.name.split('/');
                 if (name === 'home') name = 'index';
