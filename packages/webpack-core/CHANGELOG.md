@@ -48,3 +48,9 @@
 
 ### Fixed
 - Fix webpack resolve.alias
+
+## [1.0.9] - 2026-02-05
+
+### Fixed
+- remove entry from prod config
+- fix prod configuration
