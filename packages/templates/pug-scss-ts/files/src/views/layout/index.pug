@@ -5,10 +5,10 @@ append variables
 append head
 
 append style
-  link(rel='stylesheet' href='@styles/main.scss')
+  link(rel='stylesheet' href=require('@styles/main.scss'))
 
 append head
-  script(src='@scripts/app.ts')
+  script(src=require('@scripts/app.ts'))
 
 block body
   include _header

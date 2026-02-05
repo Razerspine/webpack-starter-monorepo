@@ -1,7 +1,7 @@
 {
   "name": "webpack-template-pug-scss-ts",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Webpack starter template: Pug + SCSS + TypeScript",
   "scripts": {
     "dev": "webpack serve --mode=development",
@@ -25,9 +25,14 @@
     "webpack": "^5.90.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.3",
-    "webpack-merge": "^5.10.0"
+    "webpack-merge": "^5.10.0",
+    "sass": "1.72.0",
+    "sass-loader": "^14.1.1",
+    "typescript": "^5.9.3",
+    "ts-loader": "^9.5.4"
   },
   "dependencies": {
-    "@razerspine/pug-ui-kit": "^1.2.1"
+    "@razerspine/pug-ui-kit": "^1.2.1",
+    "@razerspine/webpack-core": "^1.1.6"
   }
 }
