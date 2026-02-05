@@ -65,3 +65,8 @@
 
 ### Fixed
 - fix pug plugin for template loader
+
+## [1.1.2] - 2026-02-05
+
+### Fixed
+- another fix for pug-plugin and assets loader

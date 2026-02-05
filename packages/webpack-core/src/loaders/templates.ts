@@ -10,7 +10,7 @@ export function templatesLoader(options: {
             entry: path.resolve(process.cwd(), options.entry ?? 'src/views/pages/'),
 
             loaderOptions: {
-                root: path.resolve(process.cwd(), 'src'),
+                method: 'render',
             },
 
             filename: ({chunk}: any) => {
