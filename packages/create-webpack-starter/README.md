@@ -2,6 +2,8 @@
 
 Create a modern webpack project using ready-to-use templates.
 
+---
+
 ## Usage
 
 ```bash
@@ -16,6 +18,8 @@ npx create-webpack-starter my-app \
 --no-install
 ```
 
+---
+
 ## Options
 
 | Option              | Description                     |
@@ -23,6 +27,8 @@ npx create-webpack-starter my-app \
 | `--template <name>` | Skip prompt and select template |
 | `--no-install`      | Skip dependency installation    |
 | `--dry-run`         | Show what would be done         |
+
+---
 
 ## Available templates
 * pug-less-js
@@ -47,10 +53,13 @@ The documentation explains:
 - design principles behind `@razerspine/webpack-core`
 - common customization patterns
 
+---
 
 ## Requirement
 * Node.js >= 18
 * npm/ pnpm/ yarn
+
+---
 
 ## How it works
 1. CLI copies the selected template
@@ -58,12 +67,16 @@ The documentation explains:
 3. Dependencies are installed (unless disabled)
 4. Project is ready to use
 
+---
+
 ## What you get
 - Preconfigured webpack setup
 - Pug templates
 - SCSS / Less
 - JavaScript or TypeScript
 - Production-ready build
+
+---
 
 ## 📄 License
 This project is licensed under the ISC License.
