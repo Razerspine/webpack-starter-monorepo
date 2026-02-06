@@ -30,6 +30,24 @@ npx create-webpack-starter my-app \
 * pug-scss-js
 * pug-scss-ts
 
+---
+
+## Documentation
+
+Detailed documentation is available in the `/docs` directory:
+
+- [Getting Started](./docs/getting-started.md)
+- [Templates](./docs/templates.md)
+- [webpack-core](./docs/webpack-core.md)
+- [FAQ](./docs/faq.md)
+
+The documentation explains:
+- how the CLI works internally
+- how templates are structured
+- design principles behind `@razerspine/webpack-core`
+- common customization patterns
+
+
 ## Requirement
 * Node.js >= 18
 * npm/ pnpm/ yarn

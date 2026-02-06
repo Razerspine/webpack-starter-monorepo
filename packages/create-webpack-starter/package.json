@@ -1,6 +1,6 @@
 {
   "name": "create-webpack-starter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create a webpack starter with Pug, SCSS, TS and more",
   "bin": {
     "create-webpack-starter": "bin/index.js"
@@ -8,7 +8,10 @@
   "files": [
     "bin",
     "dist",
-    "README.md"
+    "docs",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsc",

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.2.1] - 2026-02-06
+
+### Added
+- Documentation section to README
+- Initial `docs/` directory with usage and templates overview
+
+### Changed
+- Included `docs`, `README.md`, `LICENSE`, and `CHANGELOG.md` in npm package
+
+
 ## [0.2.0] - 2026-02-06
 
 ### Added
