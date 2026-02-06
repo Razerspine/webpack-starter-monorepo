@@ -1,9 +1,23 @@
 # Changelog
 
+## [0.2.3] - 2026-02-06
+
+### Added
+- Explicit mono-repo metadata for npm publishing (`repository.directory`, `homepage`, `bugs`)
+
+### Changed
+- Updated documentation links to use absolute GitHub URLs for mono-repo compatibility
+- Improved README navigation reliability on npm registry
+
+### Notes
+- This release stabilizes documentation visibility for mono-repo setups
+- No functional changes to CLI behavior
+
+
 ## [0.2.2] - 2026-02-06
 
 ### Fixed 
-- **Documentation links** in `README.md` now resolve correctly on npm and GitHub; relative paths updated.
+- **Documentation links** in `README.md` now resolve correctly on npm and GitHub; paths updated.
 
 ### Notes
 - Republished package as **0.2.2**.
