@@ -39,3 +39,13 @@ npx create-webpack-starter my-app \
 2. Template files are written to the target directory
 3. Dependencies are installed (unless disabled)
 4. Project is ready to use
+
+## What you get
+- Preconfigured webpack setup
+- Pug templates
+- SCSS / Less
+- JavaScript or TypeScript
+- Production-ready build
+
+## 📄 License
+This project is licensed under the ISC License.

@@ -1,13 +1,14 @@
 {
   "name": "create-webpack-starter",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Create a webpack starter with Pug, SCSS, TS and more",
   "bin": {
     "create-webpack-starter": "bin/index.js"
   },
   "files": [
     "bin",
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "tsc",
@@ -28,7 +29,7 @@
     "typescript"
   ],
   "author": "Razerspine",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "commander": "^12.0.0",
     "fs-extra": "^11.2.0",
