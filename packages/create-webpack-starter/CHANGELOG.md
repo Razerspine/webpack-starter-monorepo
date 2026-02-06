@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2] - 2026-02-06
+
+### Fixed 
+- **Documentation links** in `README.md` now resolve correctly on npm and GitHub; relative paths updated.
+
+### Notes
+- Republished package as **0.2.2**.
+
 ## [0.2.1] - 2026-02-06
 
 ### Added

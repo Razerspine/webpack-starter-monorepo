@@ -42,10 +42,10 @@ npx create-webpack-starter my-app \
 
 Detailed documentation is available in the `/docs` directory:
 
-- [Getting Started](./docs/getting-started.md)
-- [Templates](./docs/templates.md)
-- [webpack-core](./docs/webpack-core.md)
-- [FAQ](./docs/faq.md)
+- [Getting Started](https://github.com/Razerspine/webpack-starter-monorepo/blob/main/packages/create-webpack-starter/docs/getting-started.md)
+- [Templates](https://github.com/Razerspine/webpack-starter-monorepo/blob/main/packages/create-webpack-starter/docs/templates.md)
+- [webpack-core](https://github.com/Razerspine/webpack-starter-monorepo/blob/main/packages/create-webpack-starter/docs/webpack-core.md)
+- [FAQ](https://github.com/Razerspine/webpack-starter-monorepo/blob/main/packages/create-webpack-starter/docs/faq.md)
 
 The documentation explains:
 - how the CLI works internally
