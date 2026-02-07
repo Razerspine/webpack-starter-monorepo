@@ -1,11 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
+import {TEMP_PREFIX} from '../constans/temp-prefix.js';
 
 (async () => {
   const tmpDir = os.tmpdir();
-  const prefix = 'create-webpack-starter-';
-
   console.log(`🧹 Starting cleanup of temporary directories in: ${tmpDir}`);
 
   try {
@@ -15,7 +14,7 @@ import os from 'node:os';
 
     for (const file of files) {
       // Check if the directory name matches our project's prefix
-      if (file.startsWith(prefix)) {
+      if (file.startsWith(TEMP_PREFIX)) {
         const fullPath = path.join(tmpDir, file);
 
         try {

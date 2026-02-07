@@ -1,12 +1,12 @@
-import { spawn } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
+import {spawn} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
 import path from 'node:path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export function runCLI(args = [], options = {}) {
-  // Дістаємо expectedExitCode, за замовчуванням 0 (успіх)
+  // Get expectedExitCode, default 0 (success)
   const expectedExitCode = options.expectedExitCode ?? 0;
 
   return new Promise((resolve, reject) => {
@@ -24,7 +24,7 @@ export function runCLI(args = [], options = {}) {
     child.on('error', reject);
 
     child.on('close', (code) => {
-      // Порівнюємо отриманий код з очікуваним
+      // Compare the resulting code with the expected code
       if (code !== expectedExitCode) {
         reject(new Error(`CLI exited with code ${code} (expected: ${expectedExitCode})`));
       } else {
